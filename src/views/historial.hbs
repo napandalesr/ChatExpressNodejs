@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Usuario</th>
+      <th scope="col">Rol</th>
+      <th scope="col">Mensaje</th>
+    </tr>
+  </thead>
+  <tbody>
+      {{#each data}}
+      <tr>
+        <td>{{username}}</td>
+        <td>{{nameRole}}</td>
+        <td>{{message}}</td>
+    </tr>
+        {{/each}}
+  </tbody>
+</table>

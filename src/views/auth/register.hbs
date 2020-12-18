@@ -1,0 +1,46 @@
+<div class="container col-md-10 ">
+  <form class="p-4 mx-auto" method="POST" action="register">
+    <h2>Registro</h2>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="name">Nombre*</label>
+        <input type="text" class="form-control" id="name" placeholder="Nombre*" name="name" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="lastname">Apellido*</label>
+        <input type="text" class="form-control" id="lastname" placeholder="Apellido*" name="lastname" required>
+      </div>
+    </div>
+    <input type="hidden" id="idRole" name="idRole">
+
+    <div class="form-group">
+      <label for="role">Rol*</label>
+      <select class="form-control" id="role" onchange="r()" required>
+        <option></option>
+        {{#each data}}
+        <option value="{{id}}">{{nameRole}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <script>
+      function r() {
+        var combo = document.getElementById("role");
+        var selected = combo.options[combo.selectedIndex].value;
+        document.getElementById("idRole").value = selected
+      }
+
+    </script>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="username">Nombre de usuario*</label>
+        <input type="username" class="form-control" id="username" placeholder="Nombre de usuario*" name="username"
+          required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="password">Contraseña*</label>
+        <input type="password" class="form-control" id="password" placeholder="Contraseña*" name="password" required>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary m-2">Guardar</button>
+  </form>
+</div>

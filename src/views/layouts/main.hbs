@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="/your-path-to-fontawesome/css/brands.css" rel="stylesheet">
+    <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <title>Chat Kuepa</title>
+    <style>
+        .header {
+            background: #7E7E7E;
+        }
+    </style>
+</head>
+<body>
+    <div style="background-color: #8D8D8D;">
+        <header>
+            <ul class="nav justify-content-end header fixed-top" style="height: 100px;">
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Active</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                {{#if user}}
+                <li class="nav-item">
+                    <a class="nav-link active" href="historial">Historial de mensajes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="chat">Chats</a>
+                </li>
+                
+                <li class="nav-item">
+                    {{user.name}}
+                    <a class="nav-link active" href="logout">Salir</a>
+                </li>
+                {{/if}}
+            </ul>
+        </header>
+        <main class="row m-5 pt-5" style="height: 600px;">
+            {{#if success}}
+            <div class="container">
+                <div class="col-md-4 mx-auto">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{success}}
+                        <Button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </Button>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+            {{#if err}}
+            <div class="container">
+                <div class="col-md-4 mx-auto">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{err}}
+                        <Button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </Button>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+            {{{body}}}
+        </main>
+        <footer style="height: 200px;">
+
+        </footer>
+    </div>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<div class="container">
+    <h3 class=" text-center">Messaging</h3>
+    <div class="messaging">
+        <div class="inbox_msg">
+            <div class="mesgs">
+                <div class="msg_history" id="msg_history">
+                </div>
+                <div class="type_msg">
+                    <div class="input_msg_write">
+                        <input type="text" class="write_msg" id="write_msg" placeholder="Type a message" onkeypress="send()"/>
+                        <button class="msg_send_btn" type="button" onclick="send()"><i class="fa fa-paper-plane-o"
+                                aria-hidden="true">Send</i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="idUser" value="{{user.id}}">
+        <input type="hidden" id="username" value="{{user.username}}">
+        <input type="hidden" id="idRole" value="{{user.idRole}}">
+    </div>
+</div>
+
+
+    socket.on('new message', function (data){
+        var htmlObject = document.createElement('div');
+                
+                if (data.idUser == document.getElementById('idUser').value) {
+                    htmlObject.innerHTML = `<div class="outgoing_msg">
+                        <div class="sent_msg">
+                            <p>`+data.message+`</p>
+                            <span class="time_date">Tú | `+data.timestamp+`</span>
+                        </div>
+                    </div>`;
+                } else {
+                    htmlObject.innerHTML = `<div class="incoming_msg">
+                        <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                        <div class="received_msg">
+                            <strong>`+data.role+`</strong>
+                        <div class="received_withd_msg">
+                            <p>`+ data.message + `</p>
+                            <span class="time_date">`+data.username+` | `+data.timestamp+`  </span></div>
+                        </div>
+                    </div>`;
+                }
+
+                document.getElementById('msg_history').append(htmlObject)
+    })
+    function send() {
+        fetch('/sendMesagge',
+            {
+                method: 'POST',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({
+                    message: document.getElementById('write_msg').value, 
+                    idUser: document.getElementById('idUser').value,
+                    username: document.getElementById('username').value,
+                    idRole: document.getElementById('idRole').value
+                })
+            }).then(res => res.json()).then(data => {
+                socket.emit('send message',data)
+                document.getElementById('write_msg').value=''
+            })
+    }
+</script>
